@@ -1,40 +1,37 @@
-//TODO: Implementar a regra da vara de pesca
+const {buscarCounter} = require("../cards/cards.js");
 
 function busca(cardOne, cardTwo){
-    let linha, coluna, op;
-    var matr = [["matriz", "arma", "lendaria", "magia", "relicario"],
-                ["arma",   'poder', 'poder',   'poder', 'poder'    ],
-                ["lendaria",'poder','poder',   'poder', 'counter'  ],
-                ["magia"   ,'poder','poder',   'magia', 'poder'    ],
-                ["relicario",'poder','counter','poder', 'relicario']]
+    let linha = 1, coluna = 1, op;
+    var matr = [["matriz", "Arma", "Lendaria", "Magia", "Relicário"],
+                ["Arma",   'poder', 'poder',   'poder', 'poder'    ],
+                ["Lendaria",'poder','poder',   'poder', 'counter'  ],
+                ["Magia"   ,'poder','poder',   'Magia', 'poder'    ],
+                ["Relicário",'poder','counter','poder', 'Relicário']]
 
     for(let i = 1; i < 5; i++){
-        if(cardOne.type == matr[0][i])
+        
+        //console.log(`${matr[i][0]} ===  ${cardOne.type} : ${matr[i][0] === cardOne.type}`);
+        //console.log(`${matr[0][i]} ===  ${cardTwo.type} : ${matr[0][i] === cardTwo.type}`);
+        if(cardOne.type === matr[0][i])
             coluna = i;     
-        if(cardTwo.type == matr[i][0])
+        if(cardTwo.type === matr[i][0])
             linha = i;
     }
     op = matr[linha][coluna];
+    //console.log(op);
     return op;
-}
-
-function isCounter(cardOne, cardTwo)
-{
-    if(cardOne == cardTwo.counter || cardOne.counter == cardTwo)
-        return true;
-    return false;
 }
 
 function powerBattle(cardOne, cardTwo)
 {
-    if(cardOne.name == "Escudo Magico" && cardTwo.type == "magia")
+    if(cardOne.name == "Escudo Mágico" && cardTwo.type == "Magia")
         return true;
-    else if(cardTwo.name == "Escudo Magico" && cardOne.type == "magia")
+    else if(cardTwo.name == "Escudo Mágico" && cardOne.type == "Magia")
         return false;
 
-    if(cardOne.name == "Escudo" && cardTwo.type == "arma")
+    if(cardOne.name == "Escudo" && cardTwo.type == "Arma")
         return true;
-    else if(cardTwo.name == "Escudo" && cardOne.type == "arma")
+    else if(cardTwo.name == "Escudo" && cardOne.type == "Arma")
         return false;
 
     if(cardOne.power > cardTwo.power)
@@ -46,30 +43,17 @@ function powerBattle(cardOne, cardTwo)
 }
 function relicaryBattle(cardOne, cardTwo)
 {
-    const winner = batalha2(cardOne.counter, cardTwo.counter);
-            if(winner == cardOne.counter)
-                //winner = cardOne;
-                return true;
-            //else //(winner == cardTwo.counter)
-                //winner = cardTwo;
-                return false;
+    return batalha(buscarCounter(cardOne.name), buscarCounter(cardTwo.name));
 }
 function counterBattle(cardOne, cardTwo)
 {
-    if(cardOne == cardTwo.counter)
+    if(cardOne.name == cardTwo.counter)
         //winner = cardOne;
         return true;
-    else if(cardOne.counter == cardTwo)
+    else if(cardOne.counter == cardTwo.name)
         //winner = cardTwo;
         return false;
-    /*
-    else if(cardOne.type == "lendaria")
-        //winner = cardOne;
-        return true;
-    else 
-        //winner = cardTwo;
-        return false;
-    */
+    return powerBattle(cardOne, cardTwo);
 }
 function magicBattle(cardOne, cardTwo)
 {   if(cardOne.power == cardTwo.power){
@@ -80,18 +64,28 @@ function magicBattle(cardOne, cardTwo)
         //TODO: Colocar aqui a função de poder
         return powerBattle(cardOne, cardTwo);
 }
-function batalha(cardOne, cardTwo){
-    let op = busca(cardOne, cardTwo);
-
-    if(isCounter(cardOne, cardTwo))
+function isCounter(cardOne, cardTwo)
+{
+    if(cardOne.name == cardTwo.counter || cardOne.counter == cardTwo.name)
+        return true;
+    return false;
+}
+function batalha(cardOne, cardTwo)
+{
+    //console.log(cardOne, cardTwo);
+    if(isCounter(cardOne, cardTwo)){
+        console.log("COUNTER!!!");
         return counterBattle(cardOne, cardTwo);
+    }
+
+    let op = busca(cardOne, cardTwo);    
     
     switch(op){
         case 'poder':
             return powerBattle(cardOne, cardTwo);
-        case 'relicario':
+        case 'Relicário':
             return relicaryBattle(cardOne, cardTwo);
-        case 'magia':
+        case 'Magia':
             return magicBattle(cardOne, cardTwo);
         case 'counter':
             return counterBattle(cardOne, cardTwo);
@@ -100,4 +94,5 @@ function batalha(cardOne, cardTwo){
     }
 }
 
-export default batalha;
+//export default batalha;
+module.exports = batalha;

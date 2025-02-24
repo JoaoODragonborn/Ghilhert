@@ -1,4 +1,4 @@
-export default class Card{
+class Card{
 
     constructor(name, power, type, counter){
         this.name = name;
@@ -7,7 +7,7 @@ export default class Card{
         this.counter = counter;
     }
 }
-export const deckOfCards = [
+const deckOfCards = [
     new Card("Adaga",          0, "Arma", "Escudo"),
     new Card("Espada",         1, "Arma", "Escudo"),
     new Card("Katana",         2, "Arma", "Escudo"),
@@ -45,17 +45,23 @@ function adcMagiasEspeciais(){
 }
 */
 
-export function buscarCarta(cardName)
+function buscarCounter(cardName)
 {
-    deckOfCards.forEach(e => {
-        if(e.nome == cardName)
-            return e;
-        console.log("Carta não encontrada.");
-        return null;
-    });
+    const carta = deckOfCards.find(e => e.counter === cardName);
+    if(!carta)
+        console.log("Carta counter não encontrada: " + cardName);
+    return carta;
 }
 
-export function embaralharCartas(arr)
+function buscarCarta(cardName)
+{
+    const carta = deckOfCards.find(e => e.name === cardName);
+    if(!carta)
+        console.log("Carta não encontrada.");
+    return carta;
+}
+
+function embaralharCartas(arr)
 {
     tempArr = [];
     while (arr){
@@ -66,7 +72,9 @@ export function embaralharCartas(arr)
     arr = tempArr;
 }
 
-export function pescaCarta(arr)
+function pescaCarta(arr)
 {
     return arr.pop(0);
 }
+
+module.exports = {buscarCarta, buscarCounter, Card};
