@@ -1,4 +1,3 @@
-//import Cards from "./../cards/cards.js";
 const batalha = require("../cards/battle.js");
 const {buscarCarta} = require("../cards/cards.js");
 
@@ -32,7 +31,6 @@ beforeAll(() =>
 
 test("Triangulo de magias", function()
 {   
-    //console.log("Batalha triangulo");
     expect(batalha(agua, fogo)).toBe(true);
     expect(batalha(fogo, agua)).toBe(false);
     expect(batalha(agua, natureza)).toBe(false);
@@ -43,7 +41,6 @@ test("Triangulo de magias", function()
 
 test("MagiasVSMagias", function()
 {
-    //console.log("Batalha magias");
     expect(batalha(trevas, agua)).toBe(true);
     expect(batalha(agua, trevas)).toBe(false);
 
@@ -54,7 +51,6 @@ test("MagiasVSMagias", function()
 
 test("MagiasVSEscudoMagico", function()
 {
-    //console.log("Batalha escudo magias");
     expect(batalha(agua, escudoMagico)).toBe(false);
     expect(batalha(escudoMagico, agua)).toBe(true);
     expect(batalha(luz, escudoMagico )).toBe(false);
@@ -129,11 +125,3 @@ test("RelicarioVsRelicario", function()
     expect(batalha(quebraEspadas, caldeirao)).toBe(true);
     expect(batalha(caldeirao, quebraEspadas)).toBe(false);
 });
-
-
-/*
-test("", function(){
-
-    expect(batalha(, )).toBe();
-});
-*/

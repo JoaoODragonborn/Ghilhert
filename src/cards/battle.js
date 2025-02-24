@@ -9,16 +9,14 @@ function busca(cardOne, cardTwo){
                 ["Relicário",'poder','counter','poder', 'Relicário']]
 
     for(let i = 1; i < 5; i++){
-        
-        //console.log(`${matr[i][0]} ===  ${cardOne.type} : ${matr[i][0] === cardOne.type}`);
-        //console.log(`${matr[0][i]} ===  ${cardTwo.type} : ${matr[0][i] === cardTwo.type}`);
         if(cardOne.type === matr[0][i])
             coluna = i;     
         if(cardTwo.type === matr[i][0])
             linha = i;
     }
+    
     op = matr[linha][coluna];
-    //console.log(op);
+    
     return op;
 }
 
@@ -35,11 +33,9 @@ function powerBattle(cardOne, cardTwo)
         return false;
 
     if(cardOne.power > cardTwo.power)
-        //winner = cardOne;
         return true;
-    //else //if(cardOne.power < cardTwo.power)
-        //winner = cardTwo;
-        return false;
+    
+    return false;
 }
 function relicaryBattle(cardOne, cardTwo)
 {
@@ -48,31 +44,27 @@ function relicaryBattle(cardOne, cardTwo)
 function counterBattle(cardOne, cardTwo)
 {
     if(cardOne.name == cardTwo.counter)
-        //winner = cardOne;
         return true;
     else if(cardOne.counter == cardTwo.name)
-        //winner = cardTwo;
         return false;
     return powerBattle(cardOne, cardTwo);
 }
 function magicBattle(cardOne, cardTwo)
-{   if(cardOne.power == cardTwo.power){
-        //TODO: Colocar aqui a função de counter
+{   
+    if(cardOne.power == cardTwo.power)
         return counterBattle(cardOne, cardTwo);
-    }
-    //else 
-        //TODO: Colocar aqui a função de poder
-        return powerBattle(cardOne, cardTwo);
+
+    return powerBattle(cardOne, cardTwo);
 }
 function isCounter(cardOne, cardTwo)
 {
     if(cardOne.name == cardTwo.counter || cardOne.counter == cardTwo.name)
         return true;
+    
     return false;
 }
 function batalha(cardOne, cardTwo)
 {
-    //console.log(cardOne, cardTwo);
     if(isCounter(cardOne, cardTwo)){
         console.log("COUNTER!!!");
         return counterBattle(cardOne, cardTwo);
@@ -94,5 +86,4 @@ function batalha(cardOne, cardTwo)
     }
 }
 
-//export default batalha;
 module.exports = batalha;

@@ -77,4 +77,4 @@ function pescaCarta(arr)
     return arr.pop(0);
 }
 
-module.exports = {buscarCarta, buscarCounter, Card};
+module.exports = {buscarCarta, buscarCounter};
