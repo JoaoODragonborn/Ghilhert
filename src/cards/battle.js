@@ -1,4 +1,4 @@
-const {buscarCounter} = require("../cards/cards.js");
+const {buscarCounter} = require("./cards.js");
 
 function busca(cardOne, cardTwo){
     let linha = 1, coluna = 1, op;

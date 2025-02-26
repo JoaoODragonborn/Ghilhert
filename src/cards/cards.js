@@ -64,17 +64,42 @@ function buscarCarta(cardName)
 function embaralharCartas(arr)
 {
     tempArr = [];
-    while (arr){
-        rand = Math.random() * (length(arr));
-        rand %= length(arr);
-        tempArr.push(arr.pop(rand));
+    while (arr.length > 0){
+        let rand = Math.floor(Math.random() * arr.length);
+        tempArr.push(arr.splice(rand, 1)[0]);
     }
-    arr = tempArr;
+    arr.push(...tempArr);
 }
 
-function pescaCarta(arr)
+function distribuirCartas(src, deck1, deck2)
 {
-    return arr.pop(0);
+    for(let i = 0; i < 14; i++){
+        if(i % 2)
+            deck1.push(src.shift());
+        else
+            deck2.push(src.shift());
+    }
 }
 
-module.exports = {buscarCarta, buscarCounter};
+function instanciaDeck()
+{
+    return deckOfCards.slice();
+}
+
+function pescaCarta(src)
+{
+    return src.shift();
+}
+
+function isVara(card){
+    return card.name === "Vara de pesca"
+}
+
+function printDeck(arr)
+{
+    arr.forEach(e => {
+        console.log(e.name);
+    });
+}
+
+module.exports = {buscarCarta, buscarCounter, embaralharCartas, distribuirCartas, instanciaDeck, pescaCarta, isVara, printDeck};
