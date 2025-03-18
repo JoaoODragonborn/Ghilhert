@@ -1,5 +1,7 @@
 import React from "react";
-import {Card, DeckTable, Mount, MainCard, FlexDiv, BackgroundTable, DoubleCards} from './styled'
+import { BackgroundTable }from './styled'
+import Deck from "../deck";
+import MidTable from "../midTable";
 
 export default function Table(){
 
@@ -12,33 +14,3 @@ export default function Table(){
     )
 };
 
-function Deck(){
-    return(
-        <DeckTable>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-        </DeckTable>
-    );
-};
-
-function MidTable(){
-
-    return(
-        <FlexDiv>
-            <DoubleCards>
-                <Mount/>
-                <Mount/>
-            </DoubleCards>
-            <DoubleCards>
-                <MainCard/>
-                <MainCard/>
-            </DoubleCards>
-            <Mount/>
-        </FlexDiv>
-    );
-};
