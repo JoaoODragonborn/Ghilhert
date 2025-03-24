@@ -1,10 +1,11 @@
 import './App.css';
-import Table from './components/table/index.js';
+import LandPage from './pages/LandPage/index.js';
+import Tabuleiro from './pages/Tabuleiro/index.js';
 
 function App() {
   return (
     <div className="App">
-      <Table/>
+      <Tabuleiro/>
     </div>
   );
 }

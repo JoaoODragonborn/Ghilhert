@@ -63,7 +63,7 @@ function buscarCarta(cardName)
 
 function embaralharCartas(arr)
 {
-    tempArr = [];
+    const tempArr = [];
     while (arr.length > 0){
         let rand = Math.floor(Math.random() * arr.length);
         tempArr.push(arr.splice(rand, 1)[0]);
